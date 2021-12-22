@@ -14,16 +14,19 @@ public class PersonController {
     @Autowired
     PersonService personService;
 
+    // Create data person
     @PostMapping("/create")
     public Person create(@RequestBody Person person){
         return personService.create(person);
     }
 
+    // List all data person
     @GetMapping("/list")
     public List<Person> listAll(){
         return personService.listAll();
     }
 
+    // Get data person berdasarkan id
     @GetMapping("/{id}")
     public Person detail(@PathVariable Integer id){
         System.out.println("id : " + id);
@@ -33,6 +36,7 @@ public class PersonController {
         return person;
     }
 
+    // Delete data person berdasarkan id
     @DeleteMapping("/{id}")
     public String delete(@PathVariable Integer id){
         personService.delete(id);
