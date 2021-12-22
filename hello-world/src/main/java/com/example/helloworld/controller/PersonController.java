@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/person")
 public class PersonController {
     @Autowired
     PersonService personService;
@@ -24,14 +25,17 @@ public class PersonController {
     }
 
     @GetMapping("/{id}")
-    public Person detail(@RequestParam Integer id){
-        return personService.detail(id);
+    public Person detail(@PathVariable Integer id){
+        System.out.println("id : " + id);
+
+        Person person = personService.detail(id);
+        System.out.println("Person : " + person.getFirstName());
+        return person;
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@RequestParam Integer id){
+    public String delete(@PathVariable Integer id){
         personService.delete(id);
         return "Success delete data id "+id;
     }
-
 }
