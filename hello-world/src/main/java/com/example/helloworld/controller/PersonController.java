@@ -3,10 +3,13 @@ package com.example.helloworld.controller;
 import com.example.helloworld.model.Person;
 import com.example.helloworld.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/person")
@@ -28,12 +31,13 @@ public class PersonController {
 
     // Get data person berdasarkan id
     @GetMapping("/{id}")
-    public Person detail(@PathVariable Integer id){
+    public Map<Object, Object> detail(@PathVariable Integer id){
         System.out.println("id : " + id);
-
         Person person = personService.detail(id);
-        System.out.println("Person : " + person.getFirstName());
-        return person;
+        Map<Object, Object> map = new HashMap<>();
+        map.put(HttpStatus.OK.toString(), person);
+
+        return map;
     }
 
     // Delete data person berdasarkan id
